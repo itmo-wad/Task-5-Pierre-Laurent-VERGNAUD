@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cabinet</title>
+  <link rel="stylesheet" href="/static/css/cabinet.css">
+</head>
+<body>
+  <div class="header">
+    <div></div>
+    <h1>Gallery</h1>
+    <form method="POST", action="/logout">
+      <button type="submit" class="button">Logout</button>
+    </form>
+  </div>
+  <div class="gallery">
+    <div id="canvas">
+      <img id="GalleryImg" alt="OL" src="/img/OL.jpeg">
+      <div id="shadow">
+        <h2 id="title">OL</h2>
+      </div>
+    </div>
+    <div id="canvas">
+      <img id="GalleryImg" alt="Madrid" src="/img/Madrid.jpeg">
+      <div id="shadow">
+        <h2 id="title" >Madrid</h2>
+      </div>
+    </div>
+    <div id="canvas">
+      <img id="GalleryImg" alt="PSG" src="/img/PSG.jpeg">
+      <div id="shadow">
+        <h2 id="title">PSG</h2>
+      </div>
+    </div>
+    <div id="canvas">
+      <img id="GalleryImg" alt="Arsenal" src="/img/Arsenal.jpeg">
+      <div id="shadow">
+        <h2 id="title">Arsenal</h2>
+      </div>
+    </div>
+    <div id="canvas">
+      <img id="GalleryImg" alt="Barcelona" src="/img/Barcelona.jpeg">
+      <div id="shadow">
+        <h2 id="title">Barcelona</h2>
+      </div>
+    </div>
+    <div id="canvas">
+      <img id="GalleryImg" alt="Chelsea" src="/img/Chelsea.jpeg">
+      <div id="shadow">
+        <h2 id="title">Chelsea</h2>
+      </div>
+    </div>
+    <div id="canvas">
+      <img id="GalleryImg" alt="City" src="/img/City.jpeg">
+      <div id="shadow">
+        <h2 id="title">City</h2>
+      </div>
+    </div>
+    <div id="canvas">
+      <img id="GalleryImg" alt="Dortmund" src="/img/Dortmund.jpeg">
+      <div id="shadow">
+        <h2 id="title">Dortmund</h2>
+      </div>
+    </div>
+    <div id="canvas">
+      <img id="GalleryImg" alt="Inter" src="/img/Inter.jpeg">
+      <div id="shadow">
+        <h2 id="title">Inter</h2>
+      </div>
+    </div>
+    <div id="canvas">
+      <img id="GalleryImg" alt="Juventus" src="/img/Juventus.jpeg">
+      <div id="shadow">
+        <h2 id="title">Juventus</h2>
+      </div>
+    </div>
+    <div id="canvas">
+      <img id="GalleryImg" alt="Liverpool" src="/img/Liverpool.jpeg">
+      <div id="shadow">
+        <h2 id="title">Liverpool</h2>
+      </div>
+    </div>
+    <div id="canvas">
+      <img id="GalleryImg" alt="Munich" src="/img/Munich.jpeg">
+      <div id="shadow">
+        <h2 id="title">Munich</h2>
+      </div>
+    </div>
+    <div id="canvas">
+      <img id="GalleryImg" alt="Napoli" src="/img/Napoli.jpeg">
+      <div id="shadow">
+        <h2 id="title">Napoli</h2>
+      </div>
+    </div>
+    <div id="canvas">
+      <img id="GalleryImg" alt="Tottenham" src="/img/Tottenham.jpeg">
+      <div id="shadow">
+        <h2 id="title">Tottenham</h2>
+      </div>
+    </div>
+    <div id="canvas">
+      <img id="GalleryImg" alt="Ajax" src="/img/Ajax.jpeg">
+      <div id="shadow">
+        <h2 id="title">Ajax</h2>
+      </div>
+    </div>
+  </div>
+
+  <div id="modal">
+    <span class="close">&times;</span>
+    <div class="modalInfo">
+      <img class="modalImg" id="GalleryImgModal">
+      <div class="modalTexts">
+        <h2 id="titleModal"></h2>
+        <div id="textModal"><p>Text more ... plouf</p></div>
+      </div>
+    </div>
+  </div>
+  </br>
+  </br>
+  <form method="POST" action="/upload" enctype="multipart/form-data">
+		<input type="file" name="img">
+		<input type="submit" value="Upload">
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+      <ul class=flashes>
+        {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+      </ul>
+      {% endif %}
+    {% endwith %}
+	  </form>
+
+  <script>
+  var modal = document.getElementById("modal");
+  var GalleryImgModal = document.getElementById("GalleryImgModal");
+  var titleModal = document.getElementById("titleModal");
+  document.addEventListener('click', showModal);
+  function showModal() {
+    if (event.target.id == "title" || event.target.id == "shadow") {
+      modal.style.display = "flex";
+      if (event.target.parentNode.id == "canvas") {
+        if (event.target.parentNode.childNodes[1].src)
+          GalleryImgModal.src = event.target.parentNode.childNodes[1].src;
+          titleModal.innerHTML = event.target.parentNode.childNodes[1].alt;
+      } else if (event.target.parentNode.id == "shadow") {
+        if (event.target.parentNode.parentNode.childNodes[1].src)
+          GalleryImgModal.src = event.target.parentNode.parentNode.childNodes[1].src;
+          titleModal.innerHTML = event.target.parentNode.parentNode.childNodes[1].alt;
+      }
+    }
+  }
+
+  // Get the <span> element that closes the modal
+  var span = document.getElementsByClassName("close")[0];
+
+  // When the user clicks on <span> (x), close the modal
+  span.onclick = function() {
+  modal.style.display = "none";
+  }
+  </script>
+</body>
+</html>
